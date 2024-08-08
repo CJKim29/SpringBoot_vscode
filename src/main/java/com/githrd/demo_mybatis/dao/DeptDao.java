@@ -3,6 +3,7 @@ package com.githrd.demo_mybatis.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.githrd.demo_mybatis.vo.DeptVo;
 
@@ -18,4 +19,10 @@ public interface DeptDao {
 
     //@Select("select * from dept")
     List<DeptVo> selectList();
+
+    @Select("select * from dept where deptno = #{ deptno }")
+    List<DeptVo> selectListFromDeptNo(int deptno);
+
+    
+    List<DeptVo> selectListFromLoc(int deptno);
 }

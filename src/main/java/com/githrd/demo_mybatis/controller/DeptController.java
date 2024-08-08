@@ -19,7 +19,7 @@ public class DeptController {
     @RequestMapping("/dept/list.do")
     public String list(Model model){
 
-        List<DeptVo> list = dept_Dao.selectList();
+        List<DeptVo> list = dept_Dao.selectListFromLoc(101);
         //System.out.println(list.size());
         model.addAttribute("list", list);
 

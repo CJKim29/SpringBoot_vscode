@@ -10,4 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from dept
     </select>
 
+    <!-- 부서 위치별 조회 -->
+    <select id="selectListFromLoc" parameterType="String" resultType="dept">
+        select * from dept where loc = ${ loc }
+    </select>
+
 </mapper>
