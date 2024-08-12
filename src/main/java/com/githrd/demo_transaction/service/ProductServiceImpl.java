@@ -97,6 +97,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int delete_in(int idx) throws Exception {
 		int res = 0;
 		
