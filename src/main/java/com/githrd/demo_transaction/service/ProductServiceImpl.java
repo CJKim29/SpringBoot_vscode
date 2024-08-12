@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.githrd.demo_transaction.dao.ProductInMapper;
 import com.githrd.demo_transaction.dao.ProductOutMapper;
@@ -64,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int insert_out(ProductVo vo) throws Exception {
 		int res = 0;
 		
