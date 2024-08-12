@@ -248,7 +248,7 @@ $(document).ready(function(){
             return;
         }
 
-        //Ajax통해서 insert : POST  /dept  {"deptno":60, "dname":"해외영업부", "loc":"606"}
+        //Ajax통해서 modify : method=PUT  uri=/dept  data={"deptno":60, "dname":"해외영업부", "loc":"606"}
         let dept = `{"deptno":${deptno}, "dname":"${dname}", "loc":"${loc}"}`;
         $.ajax({
             type        :   "PUT",

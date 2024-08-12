@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
+@Data   //@getter + @setter + @toString
 @Entity
 @Table(name="dept") //Entity명과 Table명이 같으면 생략 가능
 public class Dept {
