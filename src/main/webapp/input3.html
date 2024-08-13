@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input3</title>
+
+    <script>
+        function send(f){
+
+            let title = f.title.value.trim();
+            let count = f.photo.files.length;
+
+            if(title==""){
+                alert("제목을 입력하세요");
+                f.title.value="";
+                f.title.focus();
+                return;
+            }
+
+            if(count<1 || count>6){
+                alert("1~6장 사이의 사진만 업로드 가능합니다");
+            }
+
+            f.action = "upload3.do";
+            f.submit();
+        }
+    </script>
+</head>
+<body>
+    <!-- file upload는 반드시 POST -->
+    <form method="POST" enctype="multipart/form-data"> 
+        제목 : <input name="title"><br>
+        사진 : <input type="file" name="photo" multiple><br>
+        <input type="button" value="전송" onclick="send(this.form);">
+    </form>
+</body>
+</html>
