@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.girhrd.demo_photo.dao.PhotoMapper">
+
+	<!-- 전체 조회 -->
+	<select id="selectList" resultType="photo">	
+		select * from photo order by p_idx desc
+	</select>
+	
+	<!-- Paging별 조회 -->
+	<select id="selectPageList" parameterType="Map" resultType="photo">
+	select pp.* from
+		(
+			select
+				rank() over(order by p_idx desc) as no,
+				p.*
+			from
+				(select * from photo) p
+		)pp
+	where no between #{ start } and #{ end }
+	</select>
+	
+	<!-- 전체 레코드 수 구하기 
+			Oracle : nvl()
+			MySQL  : ifnull()
+	-->
+	<select id="selectRowTotal" resultType="int">
+		<!-- 전체 게시물 수 구하기 nvl(null value라면 0을 return) -->
+		select ifnull(count(*),0) from photo
+	</select>
+	
+	<!-- idx -->
+	<select id="selectOne" parameterType="int" resultType="photo">
+		select * from photo where p_idx = #{ p_idx }
+	</select>
+	
+	<!-- insert -->
+	<insert id="insert" parameterType="photo">
+		insert into photo values(
+									null,
+									#{ p_title },
+									#{ p_content },
+									#{ p_filename },
+									#{ p_ip },
+									sysdate(),
+									#{ mem_idx },
+									#{ mem_name }
+								)
+	</insert>
+	
+	<!-- delete -->
+	<delete id="delete" parameterType="int">
+		delete from photo where p_idx = #{ p_idx }
+	</delete>
+	
+	<!-- update_filename -->
+	<update id="updateFilename" parameterType="photo">
+		update photo set p_filename=#{ p_filename } where p_idx=#{ p_idx }
+	</update>
+	
+	<!-- update -->
+	<update id="update" parameterType="photo">
+		update photo set p_title=#{ p_title }, p_content=#{ p_content }, p_ip=#{ p_ip }, p_regdate=sysdate()  where p_idx=#{ p_idx }
+	</update>
+</mapper>
